@@ -25,9 +25,8 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('/dashboard', function () {
-    return view('dashboard');
-})->middleware(['auth', 'verified'])->name('dashboard');
+
+Route::get("/itemsAll", [NavigationBarLinks::class, "index"])->middleware(['auth', 'verified'])->name("items.all");
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
@@ -36,7 +35,6 @@ Route::middleware('auth')->group(function () {
 });
 
 //navigationRute
-Route::get("/itemsAll", [NavigationBarLinks::class, "index"])->name("items.all");
 Route::get("/pizzaAll", [NavigationBarLinks::class, "pizza"])->name("pizza.all");
 Route::get("/hamburgerAll", [NavigationBarLinks::class, "hamburger"])->name("hamburger.all");
 Route::get("/saladAll", [NavigationBarLinks::class, "salad"])->name("salad.all");

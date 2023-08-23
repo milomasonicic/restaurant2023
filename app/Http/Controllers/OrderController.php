@@ -11,11 +11,7 @@ class OrderController extends Controller
     //
     public function store(Request $request)
     {
-        /*$data["total"]=$request->total;
-        $data["user_id"]=auth()->user()->id;
-
-        Order::create($data);
-        return back();*/
+        
         $onGoingOrder = Order::where('user_id', auth()->user()->id)
                        ->where('status', 'pending')
                        ->first();
@@ -36,26 +32,42 @@ class OrderController extends Controller
                 'item_id' => $request->item_id,
                 'qty' => (int) $request->qty,
                 'order_id' => $onGoingOrder->id,
-                'user_id' => auth()->user()->id
+                'user_id' => auth()->user()->id,
+                'deleted_at' => null
             ]);
         }
 
         $total = 0;
+        $deleteTotal = 0;
+       
         foreach ($onGoingOrder->carts as $cart) {
                 $price = $cart->qty * $cart->item->price;
+                
+                
+                if($cart->deleted_at !== NULL){
+                    $priceDeleted = $cart->qty * $cart->item->price;
+                    $deleteTotal += $priceDeleted;
+                }
+
                 $total += $price;
         }
 
+
+        //$total -= $deleteTotal;
+        
         $onGoingOrder->total = $total;
         
+        
         $onGoingOrder->save();
-
-        return back();;
+        
+        echo($deleteTotal);
+        return back();
     }
-
+    
     public function show()
     {
         $order = Order::where('user_id', auth()->user()->id)->where('status', 'pending')->first();
+       
 
         if($order) {
             return view('order.ordersCarts', ['order' => $order, 'carts' => $order->carts]);

@@ -23,5 +23,7 @@ export default {
             require('flowbite/plugin')
         ],
     },
-    
+    colors:{
+        orange: "#FD4501"
+    }
 };

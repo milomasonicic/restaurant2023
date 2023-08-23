@@ -1,83 +1,70 @@
 <x-app-layout>
-
-    <div>
- 
+    <div class="mt-16">
 
         @if (auth()->user()->roles == "user")
-        <div class="w-1/2 mx-auto border border-red-500 flex">
 
-            <div class="w-2/4">
-                
-                <img src="{{Storage::url($item->image)}}" alt="{{$item->name}}">
-            </div>
+        <div class="w-3/4 h-1/3 mx-auto flex">
 
-            <div class="w-2/4">
+            <div class="w-3/4 h-96 ">
+                <img src="{{Storage::url($item->image)}}" alt="{{$item->name}}" class="w-full h-full object-cover">
                 
-                <h3>
-                    Name: {{$item->name}}
-                 </h3>
-         
-                 <p> Description: {{$item->description}}</p>
-                 <p> Price: {{$item->price}}$</p>
-                <form action="{{route("order.store")}}" method="POST">
-        
-                    @csrf
-                    <label for="qty">Quantity:</label>
-                    <input type="text" name="qty" value="1" class="w-8">
-                
-                    <input type="integer" name="item_id" value="{{$item->id}}">  
-                    <button>Add to cart</button>
             </div>
-            </form>
             
-        </div>
-        
+            <div class="w-2/4" style="background-color:#F75C1E;">
+                
+                <h3 class="font-bold pt-10 pl-10 text-5xl text-white">
+                    {{ ucfirst ($item->name)}}
+                </h3>
+                
+                <p class="text-xl pl-10 text-3xl text-white "> {{$item->price}}$</p>
+                <p class="pt-10 pl-10 text-white"> {{ ucfirst ($item->description)}}</p>
+                
+                <form action="{{route("order.store")}}" method="POST" class="pt-10 pl-10">
+                    @csrf
+                    <label for="qty" class="text-lg text-white">Quantity:</label>
+                    <input type="text" name="qty" value="1" class="w-8">
+                    
+                    <input type="integer" name="item_id" value="{{$item->id}}" hidden>  
+                    
+                    <button type="submit" class="bg-white hover:bg-gray-100 text-gray-800 font-semibold py-2 px-4 border border-gray-400 rounded shadow">
+                        Add to cart
+                    </button>
+                    
+                </form>
+                </div>
+                
         @else
 
-        <div class="w-3/4 mx-auto border border-red-500 flex flex-col">
+        <div class="w-2/4 mx-auto flex flex-col">
 
-            <h1> Edit item {{$item->name}}</h1>
-            <form action="{{route("admin.update")}}" method="POST">
+            
+            <form action="{{route("admin.update")}}" method="POST" class="bg-white rounded-lg">
+                <h1 style="text-transform: capitalize;" class="text-2xl text-center my-8 tracking-wide text-gray-900 font-semibold"> {{$item->name}}</h1>
                 
                 @csrf
-                <div class="w-1/2 pt-10 mx-auto border border-red-500 flex flex-col">
+                <div class="w-2/4 pt-5 mx-auto flex flex-col">
                     
-                    <label for="name">name</label>
+                    <label for="name" class="mt-5 tracking-wide text-gray-900 font-semibold">Name</label>
                     <input type="text" name="name" value="{{$item->name}}">
                     <input type="" name="id" value="{{$item->id}}" hidden>
                     
-                <label for="description">description</label>
-            
+                <label for="description" class="mt-5 tracking-wide text-gray-900 font-semibold">Description</label>
                 <textarea type="text" rows="5" cols="50" name="description" value="{{$item->description}}">{{$item->description}}</textarea>
 
+            
+                     
+                <label for="price" class="mt-5 tracking-wide text-gray-900 font-semibold">Price</label>
+                <input type="text" name="price" value="{{$item->price}}">    
                 
-                    
-                <label for="price">price</label>
-                <input type="textarea" name="price" value="{{$item->price}}">    
-                <label for="category">Category</label>
-                <input type="radio" name="category" value="food">Food
-                <input type="radio" name="category" value="drink">Drink
-            
-               <label for="food_sub_category">food_sub_category</label>
-                <select name="food_sub_category" id="">
-                    <option value="">not food</option>
-                    <option value="pizza">pizza</option>
-                    <option value="hamburger">hamburger</option>
-                    <option value="salad">salad</option>
-                </select>
-            
-               <label for="drink_sub_category">drink_sub_category</label>
-                <select name="drink_sub_category" id="">
-                    <option value="">not drink</option>
-                    <option value="juice">juice</option>
-                    <option value="coffee_tea">hot drinks</option>
-                    <option value="alcohol">alcohol</option>
-                    <option value="carbonated_drink">carbonated_drink</option>
-                </select>    
+
+                <input type="text" name="category" value="{{$item->category}}" hidden>
+                
+                <input type="text" value="{{$item->food_sub_category_id}}" name="" id="" name="drink_sub_category_id" hidden>
+                <input type="text" value="{{$item->drink_sub_category_id}}" name="drink_sub_category_id" id="" hidden>  
                 
                  </div>
                  <div class="flex justify-center">
-                     <button type="submit" class="bg-blue"> Edit</button>
+                     <button type="submit" style="background-color: #0080F6; color:azure;" class=" my-8 mr-4 font-semibold py-3 px-6 rounded shadow"> Edit</button>
                  </div>
             </form>
         @endif

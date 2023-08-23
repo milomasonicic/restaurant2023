@@ -15,13 +15,51 @@ class NavigationBarLinks extends Controller
         return view("linksinnavigation.all", ["foods"=>FoodSubCategory::all(), "drinks"=>DrinkSubCategory::all() ]);
     }
 
-    public function drinks()
+    public function drinks(Request $request)
     {
-        return view("linksinnavigation.drinks", ["juices"=>Item::where("drink_sub_category_id","2")->get(),
-        "alcohols"=>Item::where("drink_sub_category_id","1")->get(),
-        "coffie_tea"=>Item::where("drink_sub_category_id","3")->get(),
-        "carbonates"=>Item::where("drink_sub_category_id","4")->get(),
-    ]);
+        {
+            $drinkType = $request->input('drinkType');
+            //dd($drinkType);
+            /*$coffie = $request->input('coffie');
+            $carbonate_drink = $request->input('carbonate_drink');
+            $alcohol = $request->input('alcohol');*/
+         
+            if($drinkType == "juice") {
+                return view("linksinnavigation.drinks",["juices"=>Item::where("drink_sub_category_id","1")->get(),
+                "alcohols"=>[],
+                "coffie_tea"=>[],
+                "carbonates"=>[],
+            ]);
+            } elseif($drinkType == "coffie")  {
+                return view("linksinnavigation.drinks",["coffie_tea"=>Item::where("drink_sub_category_id","4")->get(),
+                "alcohols"=>[],
+                "juices"=>[],
+                "carbonates"=>[],
+            ]);
+            } elseif($drinkType == "carbonate_drink") {
+                return view("linksinnavigation.drinks",["carbonates"=>Item::where("drink_sub_category_id","2")->get(),
+                "alcohols"=>[],
+                "juices"=>[],
+                "coffie_tea"=>[],
+            ]);
+            }elseif($drinkType == "alcohol"){
+                return view("linksinnavigation.drinks", ["alcohols"=>Item::where("drink_sub_category_id","3")->get(),
+                "carbonates"=>[],
+                "juices"=>[],
+                "coffie_tea"=>[],
+            ]);
+            }elseif($drinkType == "all" || $drinkType == null ){
+                return view("linksinnavigation.drinks", [
+                    "juices"=>Item::where("drink_sub_category_id","1")->get(),
+                    "alcohols"=>Item::where("drink_sub_category_id","3")->get(),
+                    "coffie_tea"=>Item::where("drink_sub_category_id","4")->get(),
+                    "carbonates"=>Item::where("drink_sub_category_id","2")->get(),
+                ]);
+
+            }         
+          
+        }
+        
     }
 
     public function pizza()

@@ -47,7 +47,6 @@ class AdminController extends Controller
         ]);*/
 
         $path = $request->file('photo')->store('public/images');
-        //$path = Storage::putFile('avatars', $request->file('avatar'));
         
         $item=Item::create([
             "name"=>$request->name,
@@ -86,7 +85,7 @@ class AdminController extends Controller
 
     public function showOrdersPage()
     {
-        return view("admin.orders", ["orders"=> Order::all()]);
+        return view("admin.orders", ["orders"=> Order::paginate(10)]);
     }
 
     public function items(Request $request)

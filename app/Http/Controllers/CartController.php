@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Cart;
 use App\Models\Item;
+use App\Models\Order;
 use Illuminate\Http\Request;
 
 class CartController extends Controller
@@ -32,17 +33,21 @@ class CartController extends Controller
     public function delete($id)
     {
         $cart = Cart::find($id);
+        $order_id = $cart->order_id;
+        
         $cart ->delete();
+        $carts= Cart::where("order_id", $order_id)->get();
+        $total = 0;
+        foreach($carts as $cart){
+            $total += $cart->item->price * $cart->qty; 
+        }
+
+        $order = Order::find($order_id);
+        $order->total = $total;
+        $order->save();
         return back();
     }
 
-    public function qty(Request $request, $id)
-    {
-        //dd($request);
-        $cart = Cart::find($id);
-        $cart->qty = $request->qty;
-        $cart->save();
-        return back();
-    }
+    
 
 }
