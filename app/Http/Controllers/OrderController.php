@@ -11,11 +11,14 @@ class OrderController extends Controller
     //
     public function store(Request $request)
     {
+        $request->validate([
+            'qty' => 'required|numeric|min:1',
+        ]);
         
         $onGoingOrder = Order::where('user_id', auth()->user()->id)
                        ->where('status', 'pending')
                        ->first();
-
+        //dd();
         if(!$onGoingOrder) {
              $onGoingOrder = Order::create([
                 'total' => 0,
@@ -60,7 +63,7 @@ class OrderController extends Controller
         
         $onGoingOrder->save();
         
-        echo($deleteTotal);
+        //echo($deleteTotal);
         return back();
     }
     

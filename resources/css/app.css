@@ -1,3 +1,93 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+#footer{
+    margin-top: 200px;
+}
+
+@media(max-width:1020px){
+    
+    #mainDiv{
+        min-width:350px;
+        flex-direction: column;    
+    }
+
+    #mainDiv div {
+        width: 100%;
+        margin: 0;
+    }
+
+    #mainDiv h1 {
+        margin: 0;
+    }
+
+    #formDiv{
+        position: relative;
+        top: 105px;
+        min-width: 350px;
+
+        
+    }
+
+    #formDiv form {
+        display: flex;
+        flex-direction: column;
+       
+    }
+
+    #formDiv button {
+        min-width:150px;
+        min-height: 40px;
+    }
+
+    #qtyInpput {
+        min-width:150px;
+        margin-bottom: 10px;  
+    }
+
+    #imageDiv{
+        display: none;
+    }
+
+    #editSingleItemDiv{
+        min-width:75%;
+        margin-top: 35px;
+    }
+
+    #createDiv{
+        min-width:75%;
+        margin-top: 35px;
+    }
+
+    #imageUploadDiv{
+        width:300px;   
+    }
+    
+
+    #aroundTabeleDiv{
+        width:95%;   
+     }
+
+    #usersTable{
+       width:100%; 
+    }
+
+    #usersTable td{ 
+       max-width: 20%;
+     }
+     #usersTable td input{ 
+        width: 100%;
+      }
+      
+      #usersTable td select{ 
+        width: 10%;
+         border: 5px solid orange; 
+      }
+
+      #usersTable td button{ 
+        width: 100%;
+      }
+
+    
+} 

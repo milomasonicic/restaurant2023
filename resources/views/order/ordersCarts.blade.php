@@ -5,7 +5,7 @@
             <div class="bg-white dark:bg-gray-800 overflow-hidden shadow-sm sm:rounded-lg">
                 <div class="p-6 text-gray-900 dark:text-gray-100">
                     <div>
-                        <table class="w-full">
+                        <table class="w-full" id="orderTablediv">
                             <tr>
                                 <th>
                                     Name
@@ -48,7 +48,7 @@
                                     {{ $cart->qty }} 
                                 </td>
 
-                                <td class="w-36 h-36">
+                                <td class="w-36 h-36" id="imageDiv">
 
                                     <img src="{{Storage::url($cart->item->image)}}" 
                                     alt="{{$cart->item->name}}" class="w-36 h-36 object-cover">
@@ -78,13 +78,16 @@
     
     </div>
 
-    @if($order->total > 0)
-     <p class="text-center text-3xl font-bold">Total: {{ $order->total }}$</p>    
-    @endif 
+    @isset($order)
+        @if($order->total>0)
+        <p class="text-center text-3xl font-bold">Total: {{ $order->total }}$</p> 
+        @endif 
+    @endisset    
        
-    @if($order->total > 0)
+    @isset($order)
+    @if($order->total>0)
 
-    <div class="text-center mt-20">
+    <div class="text-center mt-8">
         <form action="{{route("orderFinish")}}" method="post" >
             
             @csrf
@@ -93,13 +96,11 @@
             
             <button class="w-36 bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
                 Buy
-            </button>
-            
-    
+            </button>      
         </form>
     </div>
     @endif  
-
+    @endisset  
 
 
 

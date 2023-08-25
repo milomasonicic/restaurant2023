@@ -1,7 +1,7 @@
 <x-app-layout>
-    <div class="w-2/4 mx-auto bg-white rounded-lg mt-16 px-5 py-8">
+    <div class="w-2/4 mx-auto bg-white rounded-lg mt-16 px-5 py-8" id="aroundTabeleDiv">
 
-        <table class="w-3/4 mx-auto">
+        <table class="w-3/4 mx-auto" id="usersTable">
             <tr>
                 <th>name</th>
                 <th>email</th>

@@ -12,7 +12,7 @@
             </div> 
     </div>
 
-    <div class="w-1/2  mx-auto py-96">
+    <div class="w-1/2  mx-auto mb-16">
         
         <h2 class="uppercase text-4xl font-mono pt-24 pb-5 tracking-wide text-gray-900 font-semibold">Products</h2>
         <div class="flex flex-wrap gap-6 mx-auto">          

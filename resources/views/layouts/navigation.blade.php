@@ -6,16 +6,12 @@
                 <!-- Logo -->
                 <div class="shrink-0 flex items-center">
                     <a href="{{ route('items.all') }}">
-                        <x-application-logo class="block h-9 w-auto fill-current text-gray-800" />
+                        <p style="color: #F75C1E; font-weight:bold;">PIZZA BAR</p>
                     </a>
                 </div>
 
                 <!-- Navigation Links -->
                 <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
-                   
-                    <x-nav-link :href="route('items.all')" :active="request()->routeIs('items.all')">
-                        {{ __('All items') }}
-                    </x-nav-link>
 
                     <x-nav-link :href="route('pizza.all')" :active="request()->routeIs('pizza.all')">
                         {{ __('Pizza') }}
@@ -33,11 +29,11 @@
                         {{ __('Drinks') }}
                     </x-nav-link>
 
-                  
-
+                    @if(auth()->user()->roles === "user")
                     <x-nav-link :href="route('yourOrder')" :active="request()->routeIs('yourOrder')">
                         {{ __('Your Carts') }}
                     </x-nav-link>
+                    @endif
 
                    
                     @if(auth()->user()->roles === "admin")
@@ -118,6 +114,38 @@
             <x-responsive-nav-link :href="route('items.all')" :active="request()->routeIs('items.all')">
                 {{ __('All items') }}
             </x-responsive-nav-link>
+            <x-responsive-nav-link :href="route('pizza.all')" :active="request()->routeIs('pizza.all')">
+                {{ __('Pizza') }}
+            </x-responsive-nav-link>
+            <x-responsive-nav-link :href="route('hamburger.all')" :active="request()->routeIs('hamburger.all')">
+                {{ __('Hamburger') }}
+            </x-responsive-nav-link>
+            <x-responsive-nav-link :href="route('salad.all')" :active="request()->routeIs('salad.all')">
+                {{ __('Salad') }}
+            </x-responsive-nav-link>
+            <x-responsive-nav-link :href="route('drinks.all')" :active="request()->routeIs('drinks.all')">
+                {{ __('Drinks') }}
+            </x-responsive-nav-link>
+            <li>
+                Admin Links
+            </li>
+            @if(auth()->user()->roles === "admin")
+            
+            <x-responsive-nav-link :href="route('items')" :active="request()->routeIs('items')">
+                {{ __('Items') }}
+            </x-responsive-nav-link>
+            <x-responsive-nav-link :href="route('admin.page')" :active="request()->routeIs('admin.page')">
+                {{ __('Create new item') }}
+            </x-responsive-nav-link>
+        
+            <x-responsive-nav-link :href="route('users.page')" :active="request()->routeIs('users.page')">
+                {{ __('Users') }}
+            </x-responsive-nav-link>
+            <x-responsive-nav-link :href="route('showOrdersPage')" :active="request()->routeIs('showOrdersPage')">
+                {{ __('Orders') }}
+            </x-responsive-nav-link>
+
+            @endif
         </div>
 
         <!-- Responsive Settings Options -->

@@ -21,9 +21,9 @@ use App\Http\Controllers\NavigationBarLinks;
 |
 */
 
-Route::get('/', function () {
+/*Route::get('/', function () {
     return view('welcome');
-});
+});*/
 
 
 Route::get("/itemsAll", [NavigationBarLinks::class, "index"])->middleware(['auth', 'verified'])->name("items.all");

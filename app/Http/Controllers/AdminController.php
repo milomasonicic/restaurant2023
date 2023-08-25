@@ -23,28 +23,12 @@ class AdminController extends Controller
     public function store(Request $request)
     {
 
-        //dd($request, $request->image);
-       /* $file = $request->hasFile('photo');
-        if($file){
-            $destination_path = "public/images";
-            $newFile = $request->file('photo');
-            $extention = $newFile->getClientOriginalExtension();
-           
-            $name = $request["name"].".".$extention;
-            $path = $newFile->storeAs($destination_path, $name);
-            //$request["image"] = $path;
-        }*/
-
-        //dd($request);
-        /*$data = $request->validate([
-            "name" =>"required|string|max:120",
-            //'photo' => "required"
-            "description" =>"required",
-            "category" =>"required",
-            "food_sub_category_id"=>"required",
-            "drink_sub_category_id"=>"required",
-            "price"=>"required",
-        ]);*/
+       $request->validate([
+        "name"=>"required|string|max:60",
+        "description"=>"required|string|max:100",
+        "category"=>"required",
+        "price"=>"required|numeric|max:100",
+       ]);
 
         $path = $request->file('photo')->store('public/images');
         
@@ -109,6 +93,11 @@ class AdminController extends Controller
     public function updateItem(Request $request)
     {
         //dd($request);
+        $request->validate([
+            "name" => "required|string|max:120",
+            "description"=>"required|string|max:120",
+            "price"=>"required|numeric"
+        ]);
         $item = Item::find($request->id);    
         $item->update($request->all());
 
