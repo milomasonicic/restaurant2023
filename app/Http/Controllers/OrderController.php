@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Cart;
 use App\Models\Order;
 use Illuminate\Http\Request;
+use App\Events\OrderMadeEvent;
 
 class OrderController extends Controller
 {
@@ -85,7 +86,9 @@ class OrderController extends Controller
         $order = Order::find($request->id);
         $order->status = $request->status;
         $order->save();
+        event(new OrderMadeEvent($order));
         return back();
+
     }
 }
 

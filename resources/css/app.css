@@ -22,11 +22,14 @@
         margin: 0;
     }
 
+    #mainDiv div p {
+        margin-top: 0;
+    }
+
     #formDiv{
         position: relative;
         top: 105px;
         min-width: 350px;
-
         
     }
 

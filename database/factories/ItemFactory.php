@@ -32,12 +32,12 @@ class ItemFactory extends Factory
         return [
             //
             'name' => fake()->word(),
-            'description' => fake()->sentence(),
+            'description' => "description",
             'category' => $category,
             'price' => fake()->numberBetween(2, 20),
             "food_sub_category_id"=> $food_sub,
             "drink_sub_category_id"=> $drink_sub,
-            'image' => fake()->imageUrl(200, 200, 'food'),
+            'image' => "public/images/rm7Y0siSvO5ORCMcFVHq0eavnIHeXT6TEH613Of5.jpg",
         ];
     }
 }
